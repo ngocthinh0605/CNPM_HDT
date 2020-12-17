@@ -1,0 +1,530 @@
+@{
+	ViewData["Title"]="Thông tin";
+    Layout="~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Fav icon -->
+	<link rel="shortcut icon" href="img/favicon.ico">
+
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,900,700,700italic,300' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700,600' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700' rel='stylesheet' type='text/css'>
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+
+
+	<!--flex slider stylesheet-->
+	<link rel="stylesheet" href="~/css/flexslider.css" />
+	<!--lightbox stylesheet-->
+	<link rel="stylesheet" href="~/css/image-light-box.css" />
+
+
+	<link rel="stylesheet" href="~/css/skin-lblue.css">
+	<link rel="stylesheet" href="~/css/font-awesome.min.css">
+	<link rel="stylesheet" href="~/css/normalize.css">
+	<link rel="stylesheet" href="~/css/owl.carousel.css">
+	<link rel="stylesheet" href="~/css/main.css">
+	<link rel="stylesheet" href="~/style.css">
+	<link rel="stylesheet" href="~/css/setting.css">
+	<link rel="stylesheet" href="~/css/responsive.css">
+	<script src="~/js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+
+<body>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- start main content -->
+<main class="main-container">
+<section class="product_content_area pt-40">
+	<!-- start of page content -->
+
+	<div class="lookcare-product-single container">
+
+		<div class="row">
+
+			<div class="main col-xs-12" role="main">
+
+				<div class=" product">
+
+					<div class="row">
+
+						<div class="col-md-5 col-sm-6 summary-before ">
+
+							<div class="product-slider product-shop">
+								@* <span class="onsale">Sale!</span> *@
+								<ul class="slides">
+									
+									<li data-thumb="/ImgCuteDogs/@Model.GetThuCungg.Image">
+										<a href="~/ImgCuteDogs/@Model.GetThuCungg.Image" data-imagelightbox="gallery" class="hoodie_7_front">
+											<img src="~/ImgCuteDogs/@Model.GetThuCungg.Image" class="attachment-shop_single" alt="image">
+										</a>
+									</li>
+									<li data-thumb="/ImgCuteDogs/@Model.GetThuCungg.Image">
+										<a href="~/ImgCuteDogs/@Model.GetThuCungg.Image" data-imagelightbox="gallery" class="hoodie_7_back">
+											<img src="~/ImgCuteDogs/@Model.GetThuCungg.Image" class="attachment-shop_single" alt="image">
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-sm-6 col-md-7 product-review entry-summary">
+
+							<h1 class="product_title">@Model.GetThuCungg.TenThuCung</h1>
+
+							<div class="woocommerce-product-rating">
+								<div class="star-rating" title="Rated 4.00 out of 5">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-o"></i>
+								</div>
+								<a href="#reviews" class="woocommerce-review-link">(<span class="count">3</span> customer reviews)</a>
+							</div>
+
+							<div>
+								<p class="price">
+									<ins><span class="amount">@Model.GetThuCungg.GiaBan</span></ins> VNĐ</p>
+							</div>
+						
+							@foreach (var loai in Model.GetAllLoai)
+							{
+							@if(@loai.IdLoaiThuCung  == @Model.GetThuCungg.IdLoaiThuCung)
+							{
+							<p>@loai.TapTinh</p>
+							}
+							}
+
+		
+								@using(Html.BeginForm("AddToCart","ThuCung", new { @class ="variations_form cart"}))
+							{
+								
+
+								<button class="btn btn-info mt-2"  asp-action="AddToCart" asp-route-id="@Model.GetThuCungg.IdThuCung" type="submit" class="cart-button">Thêm vào giỏ</button>
+
+							}
+							<div class="product_meta">
+
+
+
+								<span class="sku_wrapper">SKU: <span class="sku">N/A</span>.</span>
+
+
+							</div>
+
+							<div class="share-social-icons">
+
+								<a href="#" target="_blank" title="Share on Facebook">
+									<i class="fa fa-facebook"></i>
+								</a>
+								<a href="#" target="_blank" title="Share on Twitter">
+									<i class="fa fa-twitter"></i>
+								</a>
+								<a href="#" target="_blank" title="Pin on Pinterest">
+									<i class="fa fa-pinterest"></i>
+								</a>
+								<a href="#" target="_blank" title="Share on Google+">
+									<i class="fa fa-google-plus"></i>
+								</a>
+							</div>
+
+						</div>
+						<!-- .summary -->
+
+					</div>
+
+					<div class="wrapper-description">
+
+						<ul class="tabs-nav clearfix">
+							@foreach (var loai in Model.GetAllLoai)
+							{
+							@if(@loai.IdLoaiThuCung  == @Model.GetThuCungg.IdLoaiThuCung)
+							{
+							<li class="active">Đặc điểm của giống @loai.TenLoai</li>
+							}
+							}
+							<li>Tuổi thọ</li>
+							<li>Cách nuôi</li>
+						</ul>
+						<div class="tabs-container product-comments">
+
+							<div class="tab-content">
+								<section class="related-products">
+
+									<h2>Đặc điểm</h2>
+
+									@foreach (var loai in Model.GetAllLoai)
+									{
+									@if(@loai.IdLoaiThuCung  == @Model.GetThuCungg.IdLoaiThuCung)
+									{
+									<p>@loai.NgoaiHinh</p>
+									}
+									}
+								</section>
+							</div>
+
+
+
+							<div class="tab-content">
+								<div class="panel entry-content">
+
+									<h2>Tuổi thọ</h2>
+
+									@foreach (var loai in Model.GetAllLoai)
+									{
+									@if(@loai.IdLoaiThuCung  == @Model.GetThuCungg.IdLoaiThuCung)
+									{
+									<p>@loai.TuoiTho</p>
+									}
+									}
+								</div>
+							</div>
+							<div class="tab-content">
+								<div class="panel entry-content">
+
+									<h2>Cách nuôi</h2>
+
+									@foreach (var loai in Model.GetAllLoai)
+									{
+									@if(@loai.IdLoaiThuCung  == @Model.GetThuCungg.IdLoaiThuCung)
+									{
+									<p>@loai.CachNuoi</p>
+									}
+									}
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+					
+
+
+
+
+				</div>
+				<!-- #product-293 -->
+				<h3 class="section-title">Gợi ý</h3>
+
+									<div class="related-products-wrapper"></div>
+
+										<div class="related-products-carousel">
+											<div class="row product-listing">
+												<div id="product-carousel" class="product-listing">
+												@foreach (var thucung in Model.thuCung)
+												{
+													@if(@thucung.IdLoaiThuCung == Model.GetThuCungg.IdLoaiThuCung && @thucung.IdThuCung != Model.GetThuCungg.IdThuCung )
+													{
+														<div class="product  item first ">
+
+														<article>
+
+
+															<figure>
+												
+																	<a href="" data-imagelightbox="gallery" class="hoodie_7_front">
+																		<img src="~/ImgCuteDogs/@Model.GetThuCungg.Image" class="attachment-shop_single" alt="image">
+																	</a>
+												
+																<figcaption><span class="amount">@thucung.GiaBan VNĐ</span></figcaption>
+															</figure>
+
+															<h4 class="title"><a asp-action="PetDetails" asp-route-id="@thucung.IdThuCung">@thucung.TenThuCung</a></h4>
+
+
+															<a asp-action="Cart" asp-route-id="@thucung.IdThuCung" class="button-add-to-cart">Thêm vào giỏ</a>
+														</article>
+
+													</div>
+													}	
+												}
+												</div>
+
+											</div>
+										</div>
+
+									</div>
+
+
+			</div>
+			<!-- end of main -->
+
+		</div>
+		<!-- end of .row -->
+
+	</div>
+
+	<!-- end of page content -->
+</section>
+
+
+
+<!-- All Script -->
+<script src="~/js/vendor/jquery-1.10.2.min.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/smoothscroll.js"></script>
+<!-- Scroll up js
+============================================ -->
+<script src="~/js/jquery.scrollUp.js"></script>
+<script src="~/js/menu.js"></script>
+
+
+<script src="~/js/flexslider/jquery.flexslider-min.js"></script>
+<script src="~/js/image-lightbox/imagelightbox.js"></script>
+
+
+<script src="~/js/owl.carousel.min.js"></script>
+<script src="~/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/javascript">
+	/*-----------------------------------------------------------------------------------*/
+	/* Flex Slider
+	 /*-----------------------------------------------------------------------------------*/
+	if (jQuery().flexslider) {
+
+		// Product Page Flex Slider
+		$('.product-slider').flexslider({
+			animation: "slide",
+			animationLoop: false,
+			slideshow: false,
+			prevText: '<i class="fa fa-angle-left"></i>',
+			nextText: '<i class="fa fa-angle-right"></i>',
+			animationSpeed: 250,
+			controlNav: "thumbnails"
+		});
+
+	}
+
+
+	/*-----------------------------------------------------------------------------------*/
+	/* Product Carousel
+	 /*-----------------------------------------------------------------------------------*/
+	if (jQuery().owlCarousel) {
+		var productCarousel = $("#product-carousel");
+		productCarousel.owlCarousel({
+			loop: true,
+			dots: false,
+			responsive: {
+				0: {
+					items: 1
+				},
+				480: {
+					items: 2
+				},
+				900: {
+					items: 3
+				},
+				1100: {
+					items: 4
+				}
+			}
+		});
+
+		// Custom Navigation Events
+		$(".product-control-nav .next").on("click", function() {
+			productCarousel.trigger('next.owl.carousel');
+		});
+
+		$(".product-control-nav .prev").on("click", function() {
+			productCarousel.trigger('prev.owl.carousel');
+		});
+	}
+
+
+
+	/*-----------------------------------------------------------------------------------*/
+	/* Tabs
+	 /*-----------------------------------------------------------------------------------*/
+	$(function() {
+		var $tabsNav = $('.tabs-nav'),
+				$tabsNavLis = $tabsNav.children('li');
+
+		$tabsNav.each(function() {
+			var $this = $(this);
+			$this.next().children('.tab-content').stop(true, true).hide()
+					.first().show();
+			$this.children('li').first().addClass('active').stop(true, true).show();
+		});
+
+		$tabsNavLis.on('click', function(e) {
+			var $this = $(this);
+			$this.siblings().removeClass('active').end()
+					.addClass('active');
+			var idx = $this.parent().children().index($this);
+			$this.parent().next().children('.tab-content').stop(true, true).hide().eq(idx).fadeIn();
+			e.preventDefault();
+		});
+
+	});
+
+
+	/*-----------------------------------------------------------------------------------*/
+	/*	Tabs Widget
+	 /*-----------------------------------------------------------------------------------*/
+	$('.footer .tabbed .tabs li:first-child, .tabbed .tabs li:first-child').addClass('current');
+	$('.footer .block:first, .tabbed .block:first').addClass('current');
+
+
+	$('.tabbed .tabs li').on("click", function() {
+		var $this = $(this);
+		var tabNumber = $this.index();
+
+		/* remove current class from other tabs and assign to this one */
+		$this.siblings('li').removeClass('current');
+		$this.addClass('current');
+
+		/* remove current class from current block and assign to related one */
+		$this.parent('ul').siblings('.block').removeClass('current');
+		$this.closest('.tabbed').children('.block:eq(' + tabNumber + ')').addClass('current');
+	});
+
+
+
+	/*-----------------------------------------------------------------------------------*/
+	/*	Image Lightbox
+	 /*  http://osvaldas.info/image-lightbox-responsive-touch-friendly
+	 /*-----------------------------------------------------------------------------------*/
+	if (jQuery().imageLightbox) {
+
+		// ACTIVITY INDICATOR
+
+		var activityIndicatorOn = function() {
+					$('<div id="imagelightbox-loading"><div></div></div>').appendTo('body');
+				},
+				activityIndicatorOff = function() {
+					$('#imagelightbox-loading').remove();
+				},
+
+
+		// OVERLAY
+
+				overlayOn = function() {
+					$('<div id="imagelightbox-overlay"></div>').appendTo('body');
+				},
+				overlayOff = function() {
+					$('#imagelightbox-overlay').remove();
+				},
+
+
+		// CLOSE BUTTON
+
+				closeButtonOn = function(instance) {
+					$('<button type="button" id="imagelightbox-close" title="Close"></button>').appendTo('body').on('click touchend', function() {
+						$(this).remove();
+						instance.quitImageLightbox();
+						return false;
+					});
+				},
+				closeButtonOff = function() {
+					$('#imagelightbox-close').remove();
+				},
+
+		// ARROWS
+
+				arrowsOn = function(instance, selector) {
+					var $arrows = $('<button type="button" class="imagelightbox-arrow imagelightbox-arrow-left"></button><button type="button" class="imagelightbox-arrow imagelightbox-arrow-right"></button>');
+
+					$arrows.appendTo('body');
+
+					$arrows.on('click touchend', function(e) {
+						e.preventDefault();
+
+						var $this = $(this),
+								$target = $(selector + '[href="' + $('#imagelightbox').attr('src') + '"]'),
+								index = $target.index(selector);
+
+						if ($this.hasClass('imagelightbox-arrow-left')) {
+							index = index - 1;
+							if (!$(selector).eq(index).length)
+								index = $(selector).length;
+						} else {
+							index = index + 1;
+							if (!$(selector).eq(index).length)
+								index = 0;
+						}
+
+						instance.switchImageLightbox(index);
+						return false;
+					});
+				},
+				arrowsOff = function() {
+					$('.imagelightbox-arrow').remove();
+				};
+
+		// Lightbox for individual image
+		var lightboxInstance = $('a[data-imagelightbox="lightbox"]').imageLightbox({
+			onStart: function() {
+				overlayOn();
+				closeButtonOn(lightboxInstance);
+			},
+			onEnd: function() {
+				closeButtonOff();
+				overlayOff();
+				activityIndicatorOff();
+			},
+			onLoadStart: function() {
+				activityIndicatorOn();
+			},
+			onLoadEnd: function() {
+				activityIndicatorOff();
+			}
+		});
+
+		// Lightbox for product gallery
+		var gallerySelector = 'a[data-imagelightbox="gallery"]';
+		var galleryInstance = $(gallerySelector).imageLightbox({
+			quitOnDocClick: false,
+			onStart: function() {
+				overlayOn();
+				closeButtonOn(galleryInstance);
+				arrowsOn(galleryInstance, gallerySelector);
+			},
+			onEnd: function() {
+				overlayOff();
+				closeButtonOff();
+				arrowsOff();
+				activityIndicatorOff();
+			},
+			onLoadStart: function() {
+				activityIndicatorOn();
+			},
+			onLoadEnd: function() {
+				activityIndicatorOff();
+				$('.imagelightbox-arrow').css('display', 'block');
+			}
+		});
+
+	}
+
+
+
+</script>
+
+
+
+</body>
+
+
+</html>

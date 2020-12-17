@@ -1,0 +1,203 @@
+
+
+@{
+	ViewData["Title"]="Chi tiết đơn hàng";
+    Layout="~/Views/Shared/_Layout.cshtml";
+	ViewBag.total=0;
+	ViewBag.sl=0;
+}
+<main class="main-container">
+<!--Checkout Area Start-->
+<section class="checkout-area area-padding ptb-40">
+	<!-- Begin checkout -->
+	<div class="ld-subpage-content">
+
+		<div class="checkout-content">
+
+			<!-- Begin checkout section -->
+			<section class="checkout">
+
+
+
+				<section class="checkout-section">
+
+					<div class="ld-checkout-inner">
+
+						<div class="xs-margin"></div>
+
+						<div class="accordion" id="collapse">
+
+							<div class="accordion-group panel darkerbg">
+
+								<div class="container">
+									<h2 class="accordion-title">
+
+                
+                <span>Chi tiết đơn hàng
+                </span> <a class="accordion-btn open" data-toggle="collapse" href="#collapse-five"></a></h2>
+
+									<div class="accordion-body collapse in" id="collapse-five">
+
+										<div class="row accordion-body-wrapper">
+			
+											<div class="col-md-12">
+
+							<!-- Begin table -->
+							<table class="table cart-table">
+								<thead>
+								<tr>
+									<th class="table-title">Tên sản phẩm</th>
+									<th class="table-title"></th>
+									<th class="table-title">Đơn giá</th>
+									<th class="table-title">Số lượng</th>
+									<th class="table-title"></th>
+									<th class="table-title">Thành tiền</th>
+								</tr>
+								</thead>
+                         @foreach(var item in Model.GetCTHD)
+						 { 
+                            @foreach(var item1 in Model.GetThuCung)
+						    {
+                                @if(@item.IdThuCung== @item1.IdThuCung)
+                                {
+                                    var thanhtien= @item.SoLuong * @item1.GiaBan;
+                                    ViewBag.total += thanhtien;
+                                    <tr>
+                                            <td class="product-name-col">
+                                                <figure>
+                                                    <a href="#"><img class="img-responsive" src="~/ImgCuteDogs/@item1.Image" alt="White linen sheer dress"></a>
+                                                </figure>
+                                                <h2 class="product-name"><a href="#">@item1.TenThuCung</a></h2>
+
+                                            </td>
+                                            <td class="product-code"></td>
+                                            <td class="product-price-col">
+                                                <span class="product-price-special">@item1.GiaBan</span>
+                                            </td>
+                                            
+                                            
+                                                <td>
+                                                <div class="custom-quantity-input">
+                                                   
+                                                    <input type="number" value="@item.SoLuong" name="quantity"/>
+                                                </div>
+                                            </td>	
+                                            
+                                            <td class="product-total-col">
+                                                <span class="product-price-special">@thanhtien</span>
+                                            </td>
+                                            
+                                            
+                                        </tr>
+                                }
+                            }
+					}
+
+								<tbody>
+                                
+						
+								</tbody>
+							</table>
+							<!-- End table -->
+
+							<div class="mt-30"></div>
+
+							<div class="row">
+
+								<div class="col-md-8">
+
+									<!-- Begin tab container -->
+									<div class="tab-container left clearfix">
+
+										
+
+
+										<!-- Begin tab content -->
+										<div class="tab-content">
+
+											<div class="tab-pane fade in active" id="shipping">
+
+													
+											</div>
+											<!-- /.tab-pane -->
+										</div>
+										<!-- /.tab-content -->
+									</div>
+									<!-- /.tab-container -->
+
+
+
+									<div class="mt-30"></div>
+									<a href="#" class="btn btn-custom-6 btn-lger min-width-lg">Quay lại</a>
+								</div>
+
+								<div class="mt-30 visible-sm visible-xs clearfix"></div>
+
+								<div class="col-md-4">
+
+									<table class="table total-table">
+
+										<tbody>
+										<tr>
+											<td>Tổng cộng:</td>
+											<td>@ViewBag.total</td>
+										
+										</tr>
+										</tbody>
+									</table>
+									<!-- End table -->
+
+									<div class="mt-30"></div>
+
+									
+
+								</div>
+								<!-- /.col-md-4 -->
+							</div>
+							<!-- /.row -->
+						</div>
+				
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="xlg-margin">
+						</div>
+
+					</div>
+
+				</section>
+
+
+			</section>
+			<!-- End checkout section -->
+
+
+		</div>
+		<!-- /.checkout-content -->
+	</div>
+	<!-- /.ld-subpage-content -->
+	<!-- End checkout -->
+</section>
+<!--End of Checkout Area-->
+
+
+</main>
+<!-- end main content -->
+@section scripts
+{
+    <script src="js/vendor/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/smoothscroll.js"></script>
+    <!-- Scroll up js
+    ============================================ -->
+    <script src="js/jquery.scrollUp.js"></script>
+    <script src="js/menu.js"></script>
+
+
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.collapse.js"></script>
+    <script src="js/main.js"></script>
+}

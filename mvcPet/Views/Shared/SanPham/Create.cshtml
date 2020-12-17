@@ -1,0 +1,241 @@
+
+@model Application.DTOs.ThuCungDTO
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý loại sản phẩm</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/plugins/summernote/summernote-bs4.min.css">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="~/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">PetMVC</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="info">
+          <a href="#" class="d-block">Tên nhân viên</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <a asp-controller="Admin" asp-action="Index" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Quản lý bán hàng
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a asp-controller="Admin" asp-action="QLLOAI" class="nav-link ">
+                  <p>Quản lý loại sản phẩm</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a asp-controller="Admin" asp-action="IndexSanPham" class="nav-link  ">
+                  <p>Quản lý sản phẩm</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a asp-controller="Admin" asp-action="HoaDonDagGiao" class="nav-link">
+                  <p>Quản lý hóa đơn đang giao</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a asp-controller="Admin" asp-action="HoaDonDaGiao" class="nav-link">
+                  <p>Quản lý hóa đơn đã giao</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a asp-controller="Admin" asp-action="HoaDonDaHuy" class="nav-link">
+                  <p>Quản lý hóa đơn đã hủy</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a asp-controller="Admin" asp-action="QLTK" class="nav-link">
+                  <p>Quản lý khách hàng</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a asp-controller="Admin" asp-action="QLNV" class="nav-link">
+                  <p>Quản lý nhân vien</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a asp-controller="Admin" asp-action="ViewThongKe" class="nav-link">
+                  <p>Thống kê</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+        <h1>Create</h1>
+<h4>Thú cưng</h4>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="POST" asp-controller="Admin" asp-action="CreateSP">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">  
+            <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="TenThuCung" class="control-label"></label>
+                <input asp-for="TenThuCung" class="form-control"/>
+                <span asp-validation-for="TenThuCung" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="NgaySinh" class="control-label"></label>
+                <input asp-for="NgaySinh" class="form-control"/>
+                <span asp-validation-for="NgaySinh" class="text-danger"></span>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="CanNang" class="control-label"></label>
+                <input asp-for="CanNang" class="form-control"/>
+                <span asp-validation-for="CanNang" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="GiaNhap" class="control-label"></label>
+                <input asp-for="GiaNhap" class="form-control"/>
+                <span asp-validation-for="GiaNhap" class="text-danger"></span>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="IdLoaiThuCung" class="control-label"></label>
+                <select asp-for="IdLoaiThuCung"
+                            class="form-control"
+                                asp-items="@(new SelectList(@ViewBag.List,"IdLoaiThuCung","TenLoai"))"></select>
+                <span asp-validation-for="GiaBan" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="GiaBan" class="control-label"></label>
+                <input asp-for="GiaBan" class="form-control"/>
+                <span asp-validation-for="GiaBan" class="text-danger"></span>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+           
+            <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="ProfileImage" class="control-label"></label>
+                <input asp-for="ProfileImage" accept="ImgCuteDogs/*" />
+                <span asp-validation-for="ProfileImage" class="text-danger"></span>
+            </div>
+            </div>
+        </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Admin" asp-action="IndexSanPham">Back to List</a>
+</div>
+
+  </div>
+</div>
+<!-- jQuery -->
+<script src="~/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="~/plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="~/plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="~/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="~/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="~/plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="~/plugins/moment/moment.min.js"></script>
+<script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="~/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="~/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="~/dist/js/adminlte.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/dist/js/demo.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="~/dist/js/pages/dashboard.js"></script>
+</body>
+</html>
+
+
+
+
+

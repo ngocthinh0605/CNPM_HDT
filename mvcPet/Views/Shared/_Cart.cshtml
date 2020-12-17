@@ -1,0 +1,552 @@
+@model IList<Application.DTOs.CartDBDTO>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/vendor/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/smoothscroll.js"></script>
+    <!-- Scroll up js
+    ============================================ -->
+    <script src="js/jquery.scrollUp.js"></script>
+    <script src="js/menu.js"></script>
+
+
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.collapse.js"></script>
+    <script src="js/main.js"></script>
+    <link rel="shortcut icon" href="img/Iconka-Tailwaggers-Dog-dachshund.ico">
+
+	<!-- Font -->
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,900,700,700italic,300' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700%7CDancing+Script%7CMontserrat:400,700%7CMerriweather:400,300italic%7CLato:400,700,900' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Cantata+One' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700,600' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700' rel='stylesheet' type='text/css'>
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+
+	<!-- Magnific Popup -->
+	<link href="~/css/magnific-popup.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="~/css/font-awesome.min.css">
+	<link rel="stylesheet" href="~/css/normalize.css">
+	<link rel="stylesheet" href="~/css/skin-lblue.css">
+
+	<link rel="stylesheet" href="~/css/ecommerce.css">
+
+	<!-- Owl carousel -->
+	<link href="~/css/owl.carousel.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="~/css/main.css">
+	<link rel="stylesheet" href="~/style.css">
+	<link rel="stylesheet" href="~/css/responsive.css">
+	<link rel="stylesheet" type="text/css" href="~/css/revolutionslider_settings.css" media="screen" />
+	<script>
+        $(function () {           
+            $('#AlertBox').removeClass('hide');
+            $('#AlertBox').delay(2000).slideUp(500);
+        });
+ 
+    </script>
+</head>
+
+<body>
+    <header>
+	<!-- Top bar starts -->
+	<div class="top-bar">
+		<div class="container">
+
+			<!-- Contact starts -->
+			<div class="tb-contact pull-left">
+				<!-- Email -->
+				<i class="fa fa-envelope color"></i> &nbsp; <a href="mailto:contact@domain.com">contact@domain.com</a>
+				&nbsp;&nbsp;
+				<!-- Phone -->
+				<i class="fa fa-phone color"></i> &nbsp; +1 (342)-(323)-4923
+			</div>
+
+			<div class="tb-contact pull-right">
+				@{
+					var sessionuser = HttpContextAccessor.HttpContext.Session;
+					string user = sessionuser.GetString("TenUser");
+					if(user == null)
+					{
+						<a asp-action="Login" asp-controller="Home"  class="btn" id="btn-dang-nhap"><i class="fa fa-user-circle" style="padding-right: .5rem;"></i>Đăng nhập</a>
+                		<a asp-action="Regsister"  asp-controller="Home"  class="btn" id="btn-dang-ky">Đăng ký</a>
+					}
+					else{
+						<a  ><i class="fa fa-user-circle" style="padding-right: .5rem;"></i>@user</a>
+                		<a asp-action="Logout"  asp-controller="Home" asp-controller="Home" class="btn" id="btn-dang-ky">Đăng xuất</a>
+					}
+				}
+			</div>
+			<!-- Contact ends -->
+
+			<!-- Shopping kart starts -->
+			<div class="tb-shopping-cart pull-right">
+				<!-- Link with badge -->
+				@* @foreach (var pet in Model.GetThuCung)
+					{
+						
+						@foreach(var thucung in Model.GetCart)
+						{
+
+						@if(@pet.IdThuCung == @thucung.Id)
+						{
+							dem++;
+						}
+						}
+					} *@
+				@* <a asp-controller="ThuCung" asp-action="Cart" class="btn btn-white btn-xs b-dropdown"><i class="fa fa-shopping-cart"></i> <i class="fa fa-angle-down color"></i> <span class="badge badge-color"></span></a> *@
+
+				<!-- Dropdown content with item details -->
+				<div class="b-dropdown-block">
+					<!-- Heading -->
+					<h4><i class="fa fa-shopping-cart color"></i>Giỏ hàng</h4>
+					<ul class="list-unstyled">
+						<!-- Item 1 -->
+				@* @foreach (var pet in Model.GetThuCung)
+					{
+						
+						@foreach(var thucung in Model.GetCart)
+						{
+
+						@if(@pet.IdThuCung == @thucung.Id)
+						{
+						<li>
+							<!-- Item image -->
+							<div class="cart-img">
+								<a asp-controller="ThuCung" asp-action="PetDetails" asp-route-id="@pet.IdThuCung"><img src="~/ImgCuteDogs/@pet.Image" alt="" class="img-responsive" /></a>
+							</div>
+							<!-- Item heading and price -->
+									<div class="cart-title">
+										<h5><a asp-controller="ThuCung" asp-action="PetDetails" asp-route-id="@pet.IdThuCung">@pet.TenThuCung</a></h5>
+										<!-- Item price -->
+									</div>
+							
+							<div class="clearfix"></div>
+						</li>
+						}
+						}
+					} *@
+					</ul>
+					<a asp-controller="ThuCung" asp-action="Cart" class="btn btn-white btn-sm">Xem giỏ hàng</a> &nbsp; <a asp-controller="ThuCung" asp-action="Checkout" class="btn btn-color btn-sm">Kiểm tra</a>
+				</div>
+				
+			</div>
+			<!-- Shopping kart ends -->
+			<!-- Search section for responsive design -->
+			<div class="tb-search pull-left">
+				<a href="#" class="b-dropdown"><i class="fa fa-search square-2 rounded-1 bg-color white"></i></a>
+				<div class="b-dropdown-block">
+					<form>
+						<!-- Input Group -->
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Tìm kiếm...">
+									<span class="input-group-btn">
+										<button class="btn btn-color" type="button"><i class="fab fa-search"></i></button>
+									</span>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- Search section ends -->
+
+			<!-- Social media starts -->
+			<div class="tb-social pull-right">
+				<div class="brand-bg text-right">
+					<a href="#" class="facebook"><i class="fa fa-facebook square-2 rounded-1"></i></a>
+					<!-- Brand Icons -->
+					<a href="#" class="google-plus"><i class="fa fa-google-plus square-2 rounded-1"></i></a>
+				</div>
+			</div>
+			<!-- Social media ends -->
+
+			<div class="clearfix"></div>
+		</div>
+	</div>
+
+	<!-- Top bar ends -->
+
+	<!-- Header One Starts -->
+	<div class="header-1">
+
+		<!-- Container -->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-sm-4">
+					<!-- Logo section -->
+					<div class="logo">
+						<h1><a asp-controller="Home" asp-action="Index"><i class="fa fa-bookmark-o"></i>PetMVC</a></h1>
+					</div>
+				</div>
+				<div class="col-md-6 col-md-offset-2 col-sm-5 col-sm-offset-3 hidden-xs">
+					<!-- Search Form -->
+					<div class="header-search">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Navigation starts -->
+
+		<div class="navi">
+			<div class="container">
+				<div class="navy">
+					<ul>
+						<!-- Main menu -->
+						<li><a asp-controller="Home" asp-action="Index">Trang chủ</a>
+					
+						</li>
+						<li><a asp-controller="ThuCung" asp-action="Index">Thú cưng</a>
+							<ul>
+								@* @foreach(var pet in Model.GetAllLoai)
+								{	
+									<li><a asp-controller="ThuCung" asp-action="Detail" asp-route-id="@pet.IdLoaiThuCung">@pet.TenLoai</a></li>
+								} *@
+							</ul>
+						</li>
+
+						<li><a href="#">Giới thiệu</a>
+							
+						</li>
+
+						<li><a href="#">Liên hệ</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- Navigation ends -->
+
+	</div>
+
+	<!-- Header one ends -->
+
+</header>
+    <main class="main-container">
+<!--Checkout Area Start-->
+<section class="checkout-area area-padding ptb-40">
+	<!-- Begin checkout -->
+	<div class="ld-subpage-content">
+
+		<div class="checkout-content">
+
+			<!-- Begin checkout section -->
+			<section class="checkout">
+
+
+
+				<section class="checkout-section">
+
+					<div class="ld-checkout-inner">
+
+						<div class="xs-margin"></div>
+
+						<div class="accordion" id="collapse">
+
+							<div class="accordion-group panel darkerbg">
+
+								<div class="container">
+									<h2 class="accordion-title">
+
+                <span>1. Thông tin thanh toán
+                </span> <a class="accordion-btn open" data-toggle="collapse" href="#collapse-two"></a></h2>
+
+									<div class="accordion-body collapse in" id="collapse-two">
+
+										<div class="row accordion-body-wrapper">
+
+											<form action="ConfirmCheckout">
+
+												<div class="col-sm-6 padding-right-md">
+													<h3 class="subtitle">Thông tin cá nhân của bạn </h3>
+
+													<div class="xs-margin half">
+													</div>
+
+													
+
+													<div class="form-group">
+														<label for="lastname" class="form-label">Nhập họ và tên
+
+                                                                <span class="required">*
+                </span>
+														</label>
+														@{
+														var checkoutouset = HttpContextAccessor.HttpContext.Session;
+														string user1 =  checkoutouset.GetString("TenUser");
+														if(user1 != null)
+														{
+														<input type="text" name="lastname" id="lastname" class="form-control input-lg" value="@user1" required>
+														}else{
+														<input type="text" name="lastname" id="lastname" class="form-control input-lg" required>
+														}
+														}
+													</div>
+
+													<div class="form-group">
+														<label for="email2" class="form-label">Nhập e-mail
+
+                                                                <span class="required">*
+                </span>
+														</label>
+														@{
+														var checkoutemail = HttpContextAccessor.HttpContext.Session;
+														string email =  checkoutemail.GetString("Email");
+														if(email != null)
+														{
+														<input type="email" name="email2" id="email2"  class="form-control input-lg" value="@email" required>
+														}else{
+														<input type="email" name="email2" id="email2" class="form-control input-lg" required>
+														}
+														}
+													</div>
+
+													<div class="form-group">
+														<label for="telephone" class="form-label">Nhập số điện thoại
+
+                                                                <span class="required">*
+                </span>
+														</label>
+														@{
+														var checkoutphone = HttpContextAccessor.HttpContext.Session;
+														string phone =  checkoutphone.GetString("SDT");
+														if(email != null)
+														{
+														<input type="text" name="telephone" id="telephone" value="@phone" class="form-control input-lg" required>
+														}else{
+														<input type="email" name="email2" id="email2" class="form-control input-lg" required>
+														}
+														}
+													</div>
+													<div class="top-10px">
+													</div>
+
+
+												<div class="md-margin visible-xs clearfix">
+												</div>
+
+												
+													<div class="form-group">
+														<label for="telephone" class="form-label">Nhập địa chỉ
+
+                                                                <span class="required">*
+                </span>
+														</label>
+														@{
+														var checkoutdiachi = HttpContextAccessor.HttpContext.Session;
+														string diachi =  checkoutphone.GetString("DiaChi");
+														if(diachi != null)
+														{
+														<input type="text" name="address" value="@diachi" id="address" class="form-control input-lg" required>
+														}else{
+														<input type="text" name="address" id="address" class="form-control input-lg" required>
+														}
+														}
+													</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							
+
+							
+
+							<div class="accordion-group panel">
+
+								<div class="container">
+									<h2 class="accordion-title mb-0">
+
+                <span>2. Giỏ hàng
+                </span> <a class="accordion-btn open" data-toggle="collapse" href="#collapse-five"></a></h2>
+
+									<div class="accordion-body collapse in" id="collapse-five">
+
+										<div class="row accordion-body-wrapper">
+				@using(Html.BeginForm("DeleteThuCung","ThuCung",FormMethod.Post))
+				{
+											<div class="col-md-12">
+
+							<!-- Begin table -->
+							<table class="table cart-table">
+								<thead>
+								<tr>
+									<th class="table-title">Tên sản phẩm</th>
+									<th class="table-title"></th>
+									<th class="table-title">Đơn giá</th>
+									<th class="table-title">Số lượng</th>
+									<th class="table-title"></th>
+									<th class="table-title">Thành tiền</th>
+									<th>
+
+										<span class="close-button disabled"></span></th>
+									
+									<th class="table-title">Thanh toán</th>
+								</tr>
+								</thead>
+
+
+								<tbody>
+
+						@for(int i=0; i< Model.Count();i++)
+						 {
+						
+							var thanhtien=@Model[i].Quantity * @Model[i].DonGia;
+        					ViewBag.total += thanhtien;
+							<tr>
+									<td class="product-name-col">
+										<figure>
+											<a href="#"><img class="img-responsive" src="~/ImgCuteDogs/@Model[i].image" alt="White linen sheer dress"></a>
+										</figure>
+										<h2 class="product-name"><a href="#">@Model[i].TenThuCung</a></h2>
+
+									</td>
+									<td class="product-code"></td>
+									<td class="product-price-col">
+										<span class="product-price-special">@Model[i].DonGia</span>
+									</td>
+									
+									
+										<td>
+										<div class="custom-quantity-input">
+											<input type="hidden" asp-for="@Model[i].Id" name="productid"/>
+											<input type="number" asp-for="@Model[i].Quantity" name="quantity"/>
+										</div>
+									</td>	
+									
+									<td class="product-total-col">
+										<span class="product-price-special">@thanhtien</span>
+									</td>
+									<td class="product-total-col">
+										
+											<input type="hidden" asp-for="@thanhtien" name="GiaBan"/>
+				
+	
+									</td>
+									<td>
+										<a asp-route="removecart" asp-route-productid="@Model[i].Id" class="close-button"><i class="fa fa-times"></i></a>
+									</td>
+									
+									<td>
+										<input type="hidden" asp-for="@Model[i].Emps.Value">
+										<input asp-for="@Model[i].Emps.Selected">
+										<input type="hidden" asp-for="@Model[i].CartId">
+									</td>
+								</tr>
+					}
+								</tbody>
+							</table>
+					@if (ViewBag.Carterror != null)
+					{
+						<div class="alert alert-danger">@ViewBag.Carterror</div>
+					}
+							<!-- End table -->
+
+							<div class="mt-30"></div>
+
+							<div class="row">
+
+								<div class="col-md-8">
+
+									<!-- Begin tab container -->
+									<div class="tab-container left clearfix">
+
+										
+
+
+										<!-- Begin tab content -->
+										<div class="tab-content">
+
+											<div class="tab-pane fade in active" id="shipping">
+
+													
+											</div>
+											<!-- /.tab-pane -->
+										</div>
+										<!-- /.tab-content -->
+									</div>
+									<!-- /.tab-container -->
+
+
+
+									<div class="mt-30"></div>
+									<a href="#" class="btn btn-custom-6 btn-lger min-width-lg">Continue Shopping</a>
+								</div>
+
+								<div class="mt-30 visible-sm visible-xs clearfix"></div>
+
+								<div class="col-md-4">
+
+									<table class="table total-table">
+
+										<tbody>
+										<tr>
+											<td>Tổng cộng:</td>
+											<td>@ViewBag.total</td>
+										
+										</tr>
+										</tbody>
+									</table>
+									<!-- End table -->
+
+									<div class="mt-30"></div>
+
+									<div class="text-right"><input class="btn btn-success" type="submit" value="Thanh toán">
+									</div>
+									@if (ViewData["er"] != null)
+									{
+										<div class="alert alert-danger">@ViewData["er"]</div>
+									}
+
+								</div>
+								<!-- /.col-md-4 -->
+							</div>
+							<!-- /.row -->
+						</div>
+				}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="xlg-margin">
+						</div>
+
+					</div>
+
+				</section>
+
+
+			</section>
+			<!-- End checkout section -->
+
+
+		</div>
+		<!-- /.checkout-content -->
+	</div>
+	
+	<!-- /.ld-subpage-content -->
+	<!-- End checkout -->
+	<div class="row">
+ 
+    
+</div>
+</section>
+<!--End of Checkout Area-->
+
+
+</main>
+</body>
+</html>
+

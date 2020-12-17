@@ -1,0 +1,318 @@
+@{
+    ViewData["Title"]="Thú cưng";
+    Layout="~/Views/Shared/_Layout.cshtml";
+}
+<!-- start main content -->
+<main class="main-container">
+<section class="men_area pt-40">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-9 col-md-9 col-sm-9">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="kat-shoe-bg imgframe6">
+							<img src="~/ImgCuteDogs/@Model.banner[1].Image" alt="" />
+						</div>
+					</div>
+				</div>
+
+				<div class="product-filter">
+					<div class="row">
+						<div class="col-lg-2 col-md-2 col-sm-2">
+							<h5 class="control-label">Sắp xếp theo:</h5>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							@* <select name="price-type" id="input-sort" class="form-control">
+								<option value="">Default</option>
+								<option value="">Name (Z - A)</option>
+							</select> *@
+							<div class="dropdown show">
+								<a class="form-control dropdown-toggle" style="width: 170px;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Sắp xếp
+								</a>
+
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<a class="dropdown-item btn-block m-2" asp-controller="ThuCung">Mặc định</a>
+									<a class="dropdown-item btn-block m-2" asp-action="Detail" asp-route-sortOrder="GiaBan">Giá bán tăng dần</a>
+									<a class="dropdown-item btn-block m-2" asp-action="Detail" asp-route-sortOrder="GiaBan_desc">Giá bán giảm dần</a>
+                                    <a class="dropdown-item btn-block m-2" asp-action="Detail" asp-route-sortOrder="TenThuCung">Tên thú cưng (A-Z)</a>
+									<a class="dropdown-item btn-block m-2" asp-action="Detail" asp-route-sortOrder="TenThuCung_desc">Tên thú cưng (Z-A)</a>
+								</div>
+							</div>
+							
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-2">
+							<h5 class="control-label">Show:</h5>
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-2">
+							@using (Html.BeginForm("Detail","ThuCung",FormMethod.Get))
+                            {
+                            <p>
+                                Title: @Html.TextBox("SearchString")
+                                Giá bán khoảng : @Html.TextBox("GiaBan")
+                                <input type="submit" value="Tìm kiếm" />
+
+                            </p>
+						}
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-2">
+							<div class="button-view">
+								<a  href="#"><i class="fa fa-th-list"></i></a>
+								<a class="special_color" href="#"><i class="fa fa-th"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="shop-all" class="row mb-2">
+					<!-- Product Item #1 -->
+				@* @foreach (var pet in Model.ThuCung)
+				{
+				<div class="col-xs-12 col-sm-6 col-md-3 product-item filter-best">
+					<div class="product-img"> 
+						<img src="~/ImgCuteDogs/@pet.Image" alt="product" style="width:200px; height:250px">	
+                        <div class="product-hover">
+							<div class="product-cart">
+								<a class="btn btn-secondary btn-block" href="#">Thêm  vào giỏ</a>
+							</div>
+						</div>
+					</div>
+					<div class="product-bio">
+						<h4>
+							<a asp-action="PetDetails" asp-route-id="@pet.IdThuCung">@pet.TenThuCung</a>
+						</h4>
+						<p class="product-price btn btn-secondary btn-block">@pet.GiaBan</p>
+					</div>
+				</div>
+                } *@
+				@foreach (var pet in Model.thuCungs)
+				{
+				<div class="col-xs-12 col-sm-6 col-md-3 product-item filter-best">
+					<div class="product-img">
+						<img src="~/ImgCuteDogs/@pet.Image" alt="product" style="width:200px; height:250px">	
+                        <div class="product-hover">
+							<div class="product-cart">
+								
+								<a class="btn btn-secondary btn-block" asp-action="AddToCart" asp-route-id="@pet.IdThuCung" type="submit" class="cart-button">Thêm  vào giỏ</a>
+							
+							</div>
+						</div>
+					</div>
+					<div class="product-bio">
+						<h4>
+							<a asp-action="PetDetails" asp-route-id="@pet.IdThuCung">@pet.TenThuCung</a>
+						</h4>
+						<p class="product-price btn btn-secondary btn-block">@pet.GiaBan</p>
+					</div>
+				</div>
+				}
+				</div>
+					<div class="row">
+					<ul class="pagination">
+            @{
+                int numberPage = ViewBag.numberPage;
+                int pageCurrent = ViewBag.pageCurrent;
+                int offset = 2;//number display page
+ 
+ 
+                //config FirstLink
+                if (pageCurrent > 1)
+                {
+                    int prevPage = pageCurrent - 1;
+                    var PrevLink = new Dictionary<string, string> { { "page", prevPage.ToString() } };
+                    <li><a asp-controller="ThuCung" asp-action="Detail" asp-all-route-data="PrevLink">Trang trước</a></li>
+                }
+ 
+                int from = pageCurrent - offset;
+                int to = pageCurrent + offset;
+                if (from <= 0)
+                {
+                    from = 1;
+                    to = offset * 2;
+                }
+ 
+                
+                if (to > numberPage)
+                {
+                    to = numberPage;
+                }
+ 
+                int i;
+                for (i = from; i <= to; i++)
+                {
+                    var parms = new Dictionary<string, string>
+                    {
+                        { "page",i.ToString()}
+                    };
+                    if (pageCurrent == i)
+                    {
+                        <li class="active"><a asp-controller="ThuCung" asp-action="Detail" asp-all-route-data="parms">@i</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="ThuCung" asp-action="Detail" asp-all-route-data="parms">@i</a></li>
+                    }
+ 
+                }
+               
+                if (pageCurrent < numberPage - (to / 2))
+                {
+                    <li><a>...</a></li>
+                    var LastLink = new Dictionary<string, string> { { "page", numberPage.ToString() } };
+                    <li><a asp-controller="ThuCung" asp-action="Detail" asp-all-route-data="LastLink">Trang cuối</a></li>
+                }
+ 
+                if (pageCurrent < numberPage)
+                {
+                    int nextPage = pageCurrent + 1;
+                    var NextLink = new Dictionary<string, string> { { "page", nextPage.ToString() } };
+                    <li><a asp-controller="ThuCung" asp-action="Detail" asp-all-route-data="NextLink">Trang kế</a></li>
+                }
+            }
+        </ul>
+
+				</div>
+
+
+
+
+			</div>
+
+			<aside class="col-md-3 sidebar">
+
+				<div class="widget category-widget">
+
+					<h3>Giống thú cưng</h3>
+
+					<ul id="category-widget">
+
+						<li class="open"><a href="#">Cứng rắn
+
+							<span class="category-widget-btn"></span></a>
+							<ul>
+								<li><a href="#">Doberman</a></li>
+								<li><a href="#">Ngao Tây Tạng</a></li>
+								<li><a href="#">Rottweiler</a></li>
+							</ul>
+						</li>
+
+						<li><a href="#">Dễ thương
+
+                                  <span class="category-widget-btn">
+                                  </span></a>
+							<ul>
+								<li><a href="#">Corgi</a></li>
+								<li><a href="#">Husky</a></li>
+								<li><a href="#">Pug</a></li>
+								<li><a href="#">Golden Retriever</a></li>
+								<li><a href="#">Shiba Inu</a></li>
+							</ul>
+						</li>
+
+						<li><a href="#">Phong cách
+
+                                  <span class="category-widget-btn">
+                                  </span></a>
+							<ul>
+								<li><a href="#">Bull Anh</a></li>
+								<li><a href="#">Bully</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!-- /.category widget -->
+
+				<div class="widget">
+						<div class="accordion-group panel">
+
+							<div class="accordion-title">Price Filter
+								<a class="accordion-btn open" data-toggle="collapse" href="#price-filter"></a>
+							</div>
+
+							<div class="accordion-body collapse in" id="price-filter">
+
+								<div class="accordion-body-wrapper">
+
+									<div class="filter-price">
+
+										<div id="price-range"></div>
+
+										<div id="filter-range-details" class="row">
+
+											<div class="col-xs-6">
+
+												<div class="filter-price-label">from
+												</div>
+												<input type="text" id="price-range-low" class="form-control">
+											</div>
+
+											<div class="col-xs-6">
+
+												<div class="filter-price-label">to</div>
+												<input type="text" id="price-range-high" class="form-control">
+											</div>
+										</div>
+
+										<div class="filter-price-action">
+											<a href="#" class="btn btn-custom-6 min-width-xss">Ok</a>
+											<a href="#" class="btn btn-custom-6 min-width-xs">Clear</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /.accordion-group -->
+					</div>
+					<!-- /.accordion -->
+				</div>
+				<!-- /.widget -->
+
+
+
+				<!-- /.widget -->
+
+			</aside>
+			<!-- /.col-md-3 -->
+		</div>
+	</div>
+</section>
+
+	
+	<div class="clearfix"></div>
+</main>
+<!-- end main content -->
+
+
+
+
+
+@section scripts
+{
+<!-- All Script -->
+<script src="~/js/vendor/jquery-1.10.2.min.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/smoothscroll.js"></script>
+<!-- Scroll up js
+============================================ -->
+<script src="~/js/jquery.scrollUp.js"></script>
+<script src="~/js/menu.js"></script>
+
+<!-- Price filter script -->
+<script src="~/js/jquery.nouislider.min.js"></script>
+<script src="~/js/sidebar.js"></script>
+
+<script src="~/js/owl.carousel.min.js"></script>
+<script src="~/js/main.js"></script>
+}
+@section css
+{
+<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/skin-lblue.css">
+	<link rel="stylesheet" href="~/css/font-awesome.min.css">
+	<link rel="stylesheet" href="~/css/normalize.css">
+	<link rel="stylesheet" href="~/css/owl.carousel.css">
+	<link rel="stylesheet" href="~/css/main.css">
+	<link rel="stylesheet" href="~/style.css">
+	<link rel="stylesheet" href="~/css/setting.css">
+	<link rel="stylesheet" href="~/css/responsive.css">
+}
